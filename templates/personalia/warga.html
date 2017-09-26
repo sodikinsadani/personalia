@@ -1,0 +1,39 @@
+{% extends "kewargaan/base.html" %}
+
+{% block title %}
+  data warga
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1><span class="glyphicon glyphicon glyphicon-th-large" aria-hidden="true"></span> Data Warga</h1>
+</div>
+<div class="">
+  <table class="table table-bordered table-striped">
+    {% block table %}
+    <thead>
+      <tr class="something">
+        <th class="col-md-2">No</th>
+        <th class="col-md-4">ID Warga</th>
+        <th class="col-md-4">Nama</th>
+        <th class="col-md-2">Jenis Kelamin</th>
+        <th class="col-md-2">Jenjang</th>
+        <th class="col-md-2">Leader</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for emp in emp %}
+      <tr class="something">
+        <td class="col-sm-2">{{forloop.counter}}</td>
+        <td class="col-md-4">{{emp.emp_id|upper}}</td>
+        <td class="col-md-4">{{emp.person.name|title}}</td>
+        <td class="col-md-4">{{emp.person.gender}}</td>
+        <td class="col-md-4">{{emp.get_grade_display}}</td>
+        <td class="col-md-4">{{emp.leader.name|title}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% endblock %}
+  </table>
+</div>
+{% endblock %}

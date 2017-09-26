@@ -1,0 +1,155 @@
+{% extends "personalia/base.html" %}
+{% load static %}
+
+{% block title %}
+  tambah data
+{% endblock %}
+
+{% block content %}
+{% if msg %}
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Warning!!</h4>
+  <p>{{msg}}</p>
+</div>
+{% else %}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Silahkan input data warga dengan benar</h4>
+</div>
+{% endif %}
+<div class="page-header">
+  <h2><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Tambah Data Warga</h2>
+</div>
+<div class="form">
+  <form action="." method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="{{ form.0.nama.id_for_label }}" class="col-sm-4">Nama</label>
+        <div class="col-sm-5">
+          {{form.0.nama}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.tmpt_lahir.id_for_label }}" class="col-sm-4">Tempat / Tanggal Lahir</label>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-xs-5">
+              {{ form.0.tmpt_lahir }}
+            </div>
+            <div class="col-xs-5">
+              {{ form.0.tgl_lahir }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.jk.id_for_label }}" class="col-sm-4">Jenis Kelamin</label>
+        <div class="col-sm-3">
+          {{ form.0.jk }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat.id_for_label }}" class="col-sm-4">Alamat</label>
+        <div class="col-sm-8">
+          {{ form.0.alamat }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_desa.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_desa }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_kec.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_kec }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_kabkot.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_kabkot }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_prov.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_prov }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.hp.id_for_label }}" class="col-sm-4">Nomor HP</label>
+        <div class="col-sm-4">
+          {{ form.0.hp }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="{{ form.0.lulusan.id_for_label }}" class="col-sm-4">Pendidikan</label>
+        <div class="col-sm-3">
+          {{ form.0.lulusan }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.jenjang.id_for_label }}" class="col-sm-4">Lulusan</label>
+        <div class="col-sm-3">
+          {{ form.1.jenjang }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.tgl_daftar.id_for_label }}" class="col-sm-4">Tanggal Registrasi</label>
+        <div class="col-sm-4">
+          {{ form.1.tgl_daftar }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.status_aktif.id_for_label }}" class="col-sm-4">Status Aktip</label>
+        <div class="col-sm-3">
+          {{ form.1.status_aktif }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.segmentasi.id_for_label }}" class="col-sm-4">Segmentasi</label>
+        <div class="col-sm-4">
+          {{ form.1.segmentasi }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.pangkal.id_for_label }}" class="col-sm-4">Pangkal</label>
+        <div class="col-sm-4">
+          {{ form.1.pangkal }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.warga_media.id_for_label }}" class="col-sm-4">Warga Media</label>
+        <div class="col-sm-1">
+          {{ form.1.warga_media }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.keterangan.id_for_label }}" class="col-sm-4">Keterangan</label>
+        <div class="col-sm-8">
+          {{ form.1.keterangan }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 clearfix ">
+      <div class="text-right">
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save" aria-hidden="true"> SIMPAN</span></button>
+        <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> BATAL</span></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/jquery-ui.js" %}"></script>
+<script type="text/javascript">
+  $( "#id_tgl_lahir" ).datepicker();
+  $( "#id_tgl_daftar" ).datepicker();
+</script>
+{% endblock %}

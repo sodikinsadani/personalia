@@ -1,0 +1,39 @@
+{% extends "kewargaan/base.html" %}
+
+{% block title %}
+  laporan
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1><span class="glyphicon glyphicon glyphicon-th-large" aria-hidden="true"></span> Laporan</h1>
+</div>
+<div class="">
+  <table class="table table-bordered table-striped">
+    {% block table %}
+    <thead>
+      <tr class="something">
+        <th class="col-md-2">No</th>
+        <th class="col-md-4">Kode Laporan</th>
+        <th class="col-md-4">Nama Laporan</th>
+        <th class="col-md-2">Cetak</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rep in report %}
+      <tr class="something">
+        <td class="col-sm-2">{{forloop.counter}}</td>
+        <td class="col-md-4">{{rep.report_id|upper}}</td>
+        <td class="col-md-4">{{rep.name|title}}</td>
+        <td class="col-md-2">
+          <a href="{% url 'kewargaan:cetak' rep.report_id %}">
+            <span class="glyphicon glyphicon glyphicon-print" aria-hidden="true"></span>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% endblock %}
+  </table>
+</div>
+{% endblock %}
