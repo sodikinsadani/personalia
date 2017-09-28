@@ -12,7 +12,7 @@ class Individu(models.Model):
     ]
 
     id_individu = models.AutoField(primary_key=True)
-    nama = models.CharField(max_length=50,)
+    nama = models.CharField('nama lengkap',max_length=50)
     #nama = models.CharField(max_length=50,blank=True,null=True)
     tmpt_lahir = models.CharField(max_length=50,blank=True,null=True)
     tgl_lahir = models.DateField(blank=True,null=True)

@@ -5,10 +5,6 @@ from personalia.forms import fIndividu,fWarga
 from django.db import transaction,IntegrityError
 from django.http import HttpResponseRedirect
 
-def index(request):
-    template_name = 'personalia/index.html'
-    return render(request, template_name)
-
 def tambahWarga(request):
     template_name = 'personalia/tambahWarga.html'
     form = (fIndividu,fWarga)
@@ -29,21 +25,16 @@ def tambahWarga(request):
                 err_list.append(str(e[0]))
 
         if cekform1.is_valid() and cekform2.is_valid():
-            try:
-                with transaction.atomic():
-                    individu = cekform1.save()
-                    id_warga = str(individu.id_individu)
-                    id_warga = id_warga.zfill(10)
-                    warga = cekform2.save(commit=False)
-                    warga.individu = individu
-                    warga.id_warga = id_warga
-                    warga.save()
-                    #msg = 'Berhasil menambah data warga. Silahkan input kembali'
-                    return HttpResponseRedirect("/personalia/tambahWarga/")
-            except IntegrityError:
-                form = (cekform1,cekform2)
-                msg = 'Data sudah ada si system. Inputkan yang lain'
-
+            with transaction.atomic():
+                individu = cekform1.save()
+                id_warga = str(individu.id_individu)
+                id_warga = id_warga.zfill(10)
+                warga = cekform2.save(commit=False)
+                warga.individu = individu
+                warga.id_warga = id_warga
+                warga.save()
+                #msg = 'Berhasil menambah data warga. Silahkan input kembali'
+                return HttpResponseRedirect("/personalia/tambahWarga/")
         else :
             #raise Exception, cekform1.errors.as_data()['__all__'][0]
             #raise Exception, cekform1.errors.as_json()
