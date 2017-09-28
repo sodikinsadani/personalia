@@ -6,14 +6,18 @@
 {% endblock %}
 
 {% block content %}
-{% if msg %}
+{% if msg_err %}
 <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">Warning!!</h4>
-  <p>{{msg}}</p>
+  <p>{{msg_err}}</p>
+</div>
+{% elif msg %}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">{{msg}}</h4>
 </div>
 {% else %}
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Silahkan input data warga dengan benar</h4>
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Silahkan input data warga</h4>
 </div>
 {% endif %}
 <div class="page-header">

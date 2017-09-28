@@ -1,14 +1,15 @@
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from personalia.forms import fIndividu,fWarga
 from django.db import transaction,IntegrityError
 from django.http import HttpResponseRedirect
 
-def tambahWarga(request):
+def tambahWarga(request, msg):
     template_name = 'personalia/tambahWarga.html'
     form = (fIndividu,fWarga)
-    msg = None#'Silahkan input data warga'
+    msg = msg
+    msg_err = None
 
     if request.method == 'POST':
         cekform1 = fIndividu(request.POST)
@@ -33,15 +34,17 @@ def tambahWarga(request):
                 warga.individu = individu
                 warga.id_warga = id_warga
                 warga.save()
-                #msg = 'Berhasil menambah data warga. Silahkan input kembali'
-                return HttpResponseRedirect("/personalia/tambahWarga/")
+                msg = '''Berhasil menambah <i>{0}</i> ke dalam data warga. Silahkan input kembali
+                '''.format(individu.nama,)
+                return HttpResponseRedirect("/personalia/tambahWarga/", {'msg':msg})
+                #redirect("personalia:tambahWarga", {'msg':msg})
         else :
             #raise Exception, cekform1.errors.as_data()['__all__'][0]
             #raise Exception, cekform1.errors.as_json()
             #raise Exception, str(cekform1.errors.as_data().values()[0][0])
             #raise Exception, cekform1.errors.as_data().values()
             form = (cekform1,cekform2)
-            msg = '''Ada kesalahan dalam pengisian form. {0}'''.format(err_list)
+            msg_err = '''Ada kesalahan dalam pengisian form. {0}'''.format(err_list)
             #raise Exception, 'form invalid'
 
-    return render(request,template_name,{'form':form,'msg':msg})
+    return render(request,template_name,{'form':form,'msg':msg, 'msg_err':msg_err})
