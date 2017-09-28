@@ -31,7 +31,7 @@ class Individu(models.Model):
 
     class Meta:
         ordering = ('jk','id_individu','nama',)
-        unique_together = ('nama','jk','lulusan')
+        unique_together = ('nama','jk','alamat_kec','alamat_kabkot','alamat_prov')
 
     def __str__(self):
         return self.nama
