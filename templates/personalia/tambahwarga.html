@@ -6,30 +6,33 @@
 {% endblock %}
 
 {% block content %}
-{% if msg_err %}
-<div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">Warning!!</h4>
-  <p>{{msg_err}}</p>
-</div>
-{% elif msg %}
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">{{msg}}</h4>
-</div>
-{% else %}
-<div class="alert alert-info" role="alert">
-  <h4 class="alert-heading">Silahkan input data warga</h4>
+{% if messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {% for message in messages %}
+  {% if message.level == 30 %}
+  <h3><span class="label label-danger">{{ message.tags|upper }}</span></h3>
+  {% elif message.level == 25 %}
+  <h3><span class="label label-success">{{ message.tags|upper }}</span></h3>
+  {% else %}
+  <h3><span class="label label-info">{{ message.tags|upper }}</span></h3>
+  {% endif %}
+  <p>
+    {{message|safe}}
+  </p>
+  {% endfor %}
 </div>
 {% endif %}
 <div class="page-header">
-  <h2><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Tambah Data Warga</h2>
+  <h2><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Tambah Data Anggota</h2>
 </div>
 <div class="form">
-  <form action="." method="post" class="form-horizontal" role="form">
+  <form method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="col-md-6">
       <div class="form-group">
-        <label for="{{ form.0.nama.id_for_label }}" class="col-sm-4">Nama</label>
+        <label for="{{ form.0.nama.id_for_label }}" class="col-sm-4">Nama Anggota</label>
         <div class="col-sm-5">
           {{form.0.nama}}
         </div>
@@ -54,7 +57,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.0.alamat.id_for_label }}" class="col-sm-4">Alamat</label>
+        <label for="{{ form.0.alamat.id_for_label }}" class="col-sm-4">Alamat Lengkap</label>
         <div class="col-sm-8">
           {{ form.0.alamat }}
         </div>
@@ -99,13 +102,13 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.0.jenjang.id_for_label }}" class="col-sm-4">Lulusan</label>
+        <label for="{{ form.0.jenjang.id_for_label }}" class="col-sm-4">Jenjang Anggota</label>
         <div class="col-sm-3">
           {{ form.1.jenjang }}
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.0.tgl_daftar.id_for_label }}" class="col-sm-4">Tanggal Registrasi</label>
+        <label for="{{ form.0.tgl_daftar.id_for_label }}" class="col-sm-4">Tanggal Daftar</label>
         <div class="col-sm-4">
           {{ form.1.tgl_daftar }}
         </div>
@@ -123,13 +126,13 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.0.pangkal.id_for_label }}" class="col-sm-4">Pangkal</label>
+        <label for="{{ form.0.pangkal.id_for_label }}" class="col-sm-4">Leader</label>
         <div class="col-sm-4">
           {{ form.1.pangkal }}
         </div>
       </div>
       <div class="form-group">
-        <label for="{{ form.0.warga_media.id_for_label }}" class="col-sm-4">Warga Media</label>
+        <label for="{{ form.0.warga_media.id_for_label }}" class="col-sm-4">Anngota Media</label>
         <div class="col-sm-1">
           {{ form.1.warga_media }}
         </div>

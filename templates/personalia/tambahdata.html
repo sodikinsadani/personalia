@@ -1,0 +1,86 @@
+{% extends "personalia/base.html" %}
+{% load static %}
+
+{% block title %}
+  tambah data
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {% for message in messages %}
+  {% if message.level == 30 %}
+  <h3><span class="label label-danger">{{ message.tags|upper }}</span></h3>
+  {% elif message.level == 25 %}
+  <h3><span class="label label-success">{{ message.tags|upper }}</span></h3>
+  {% else %}
+  <h3><span class="label label-info">{{ message.tags|upper }}</span></h3>
+  {% endif %}
+  <p>
+    {{message}}
+  </p>
+  {% endfor %}
+</div>
+{% endif %}
+<div class="page-header">
+  <h2><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Tambah Data</h2>
+</div>
+<div class="form">
+  <form method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="{{ form.0.nama.id_for_label }}" class="col-sm-4">Nama</label>
+        <div class="col-sm-5">
+          {{form.0.nama}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.jk.id_for_label }}" class="col-sm-4">Jenis Kelamin</label>
+        <div class="col-sm-3">
+          {{ form.0.jk }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_desa.id_for_label }}" class="col-sm-4">Alamat</label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_desa }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_kec.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_kec }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_kabkot.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_kabkot }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.0.alamat_prov.id_for_label }}" class="col-sm-4"></label>
+        <div class="col-sm-8">
+          {{ form.0.alamat_prov }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 clearfix ">
+      <div class="text-right">
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-save" aria-hidden="true"> SIMPAN</span></button>
+        <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"> BATAL</span></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/jquery-ui.js" %}"></script>
+<script type="text/javascript">
+  $( "#id_tgl_lahir" ).datepicker();
+  $( "#id_tgl_daftar" ).datepicker();
+</script>
+{% endblock %}
