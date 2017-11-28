@@ -4,7 +4,7 @@ from . import views
 app_name = 'personalia'
 urlpatterns = [
     url(r'^$',views.index, name='index'),
-    url(r'^warga/$',views.index, name='warga'),
+    url(r'^warga/$',views.warga, name='warga'),
     url(r'^tambahanggota/$',views.tambahWarga, name='tambahWarga'),
     url(r'^laporan/$',views.index, name='laporan'),
     url(r'^pengurus/$',views.index, name='pengurus'),
