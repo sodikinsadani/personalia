@@ -1,4 +1,4 @@
-{% extends "kewargaan/base.html" %}
+{% extends "personalia/base.html" %}
 
 {% block title %}
   data warga
@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="page-header">
-  <h1><span class="glyphicon glyphicon glyphicon-th-large" aria-hidden="true"></span> Data Warga</h1>
+  <h1><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Data Anggota</h1>
 </div>
 <div class="">
   <table class="table table-bordered table-striped">
@@ -14,22 +14,23 @@
     <thead>
       <tr class="something">
         <th class="col-md-2">No</th>
-        <th class="col-md-4">ID Warga</th>
+        <th class="col-md-4">ID Anggota</th>
         <th class="col-md-4">Nama</th>
         <th class="col-md-2">Jenis Kelamin</th>
-        <th class="col-md-2">Jenjang</th>
+        <th class="col-md-2">Jenjang Karir</th>
         <th class="col-md-2">Leader</th>
       </tr>
     </thead>
     <tbody>
-      {% for emp in emp %}
+      {% for anggota in anggota %}
+      {{anggota}}
       <tr class="something">
         <td class="col-sm-2">{{forloop.counter}}</td>
-        <td class="col-md-4">{{emp.emp_id|upper}}</td>
-        <td class="col-md-4">{{emp.person.name|title}}</td>
-        <td class="col-md-4">{{emp.person.gender}}</td>
-        <td class="col-md-4">{{emp.get_grade_display}}</td>
-        <td class="col-md-4">{{emp.leader.name|title}}</td>
+        <td class="col-md-4">{{anggota.id_warga|upper}}</td>
+        <td class="col-md-4">{{anggota.individu.nama|title}}</td>
+        <td class="col-md-4">{{anggota.individu.get_jk_display}}</td>
+        <td class="col-md-4">{{anggota.get_jenjang_display}}</td>
+        <td class="col-md-4">{{anggota.pangkal.nama|title}}</td>
       </tr>
       {% endfor %}
     </tbody>

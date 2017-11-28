@@ -6,6 +6,7 @@ from django.db import transaction,IntegrityError
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from personalia.models import Warga
 
 def tambahWarga(request):
     template_name = 'personalia/tambahWarga.html'
@@ -48,3 +49,9 @@ def tambahWarga(request):
             </br>{1}'''.format(individu['nama'].upper(),err_list))
 
     return render(request,template_name,{'form':form,})
+
+def warga(request):
+    anggota = Warga.objects.all()
+    template_name = 'personalia/warga.html'
+    #template_name = 'personalia/warga_jqgrid.html'
+    return render(request,template_name,{'anggota':anggota})
